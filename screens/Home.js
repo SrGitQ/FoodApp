@@ -8,7 +8,6 @@ import {
     FlatList,
     View,
     Text,
-    ScrollView
 } from "react-native"
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
@@ -49,9 +48,9 @@ const Home = ({ navigation }) => {
 
     const renderMenu = () => {
         return (
-            <ScrollView style={styles.menuConainer}>
+            <FlatList style={styles.menuConainer}>
 
-            </ScrollView>
+            </FlatList>
         );
     }
 

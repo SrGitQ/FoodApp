@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { COLORS } from '../constants';
 
 const LineSection = () => {
 	return(
@@ -9,7 +10,7 @@ const LineSection = () => {
 
 const styles = StyleSheet.create({
 	LineSection:{
-		backgroundColor:'gray',
+		backgroundColor:COLORS.darkgray,
 		height:1
 	},
 });

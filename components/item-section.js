@@ -3,10 +3,8 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 
 
-const CategorySection = (props) => {
+const ItemSection = (props) => {
 
-
-	let menu = props.menu
 
 	const renderImage = () => {
 		return (
@@ -21,27 +19,28 @@ const CategorySection = (props) => {
 	const renderDescription = () => {
 		return (
         	<View style={styles.sectionDescription}>
-        	    <Text style={styles.menuTitle}>{menu}</Text>
-        	    <Text style={styles.menuDescription}>Lorem ipsum dolor</Text>
+        	    <Text style={styles.itemTitle}>{props.name}</Text>
+        	    <Text style={styles.itemDescription}>Lorem ipsum dolor</Text>
+                <Text style={styles.itemPrice}>$ {props.price}</Text>
         	</View>
 		);
 	}
-
+    
 	const renderButton = () => {
-		return (
-        	<View style={styles.sectionButton}>
+        return (
+            <View style={styles.sectionButton}>
         	    <TouchableOpacity
 					onPress={() => {props.nav()}}
-					style={styles.openMenuButton}
+					style={styles.openItemButton}
 				>
-					<Text style={styles.openMenuButtonText}>ORDENAR</Text>
+                    <Text style={styles.openItemButtonText}>Agregar</Text>
 				</TouchableOpacity>
         	</View>
 		);
 	}
 
     return(
-    	<View style={styles.menuContainer}>
+    	<View style={styles.itemContainer}>
 			{renderImage()}
 			{renderDescription()}
 			{renderButton()}
@@ -50,24 +49,29 @@ const CategorySection = (props) => {
 }
 
 const styles = StyleSheet.create({
+    itemPrice:{
+        color: '#ffc108',
+        fontWeight:'bold',
+        fontSize:17
+    },
 	LineSection:{
 		backgroundColor:'gray',
 		height:40
 	},
-	openMenuButtonText:{
+	openItemButtonText:{
 		color: COLORS.white,
 		fontWeight:'bold'
 	},
-	openMenuButton:{
+	openItemButton:{
 		backgroundColor:COLORS.black,
 		paddingHorizontal:10,
 		paddingVertical:5,
 		borderRadius:20
 	},
-	menuDescription:{
+	itemDescription:{
 		color:COLORS.darkgray,
 	},
-	menuTitle:{
+	itemTitle:{
 		fontWeight:'bold',
 		fontSize:20
 	},
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
 		justifyContent:'center',
 		alignItems:'center'
 	},
-	menuContainer:{
+	itemContainer:{
         flex:1,
         flexDirection:'row',
         height:89
@@ -106,4 +110,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CategorySection
+export default ItemSection

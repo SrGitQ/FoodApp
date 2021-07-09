@@ -122,7 +122,7 @@ const combinaciones = {
 }
 
 const alambres = {
-    category_name:"alambres",
+    category_name:"Alambres",
     items:[
         {
             id:1,

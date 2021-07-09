@@ -25,15 +25,13 @@ const Home = ({ navigation }) => {
 
         return (
             <View style={styles.headerContainer}>
-                <TouchableOpacity
-                    onPress={ () => navigation.navigate("Search") }
-                >
+                <TouchableOpacity onPress={ () => navigation.navigate("Search") }>
                     <Image source={icons.search} style={styles.icon}/>
                 </TouchableOpacity>
+
                 <Image source={images.logo} style={styles.logo}/>
-                <TouchableOpacity
-                    onPress={ () => navigation.navigate("Cart") }
-                >
+
+                <TouchableOpacity onPress={ () => navigation.navigate("Cart") }>
                     <Image source={icons.cart} style={styles.icon}/>
                 </TouchableOpacity>
             </View>
@@ -52,10 +50,13 @@ const Home = ({ navigation }) => {
     const renderMenu = () => {
         const categories = menu.map( (menu, i) =>{
             return(
-                <>
-                    <CategorySection menu={menu.category_name} key={i} nav={()=>navigation.navigate("Menu")}></CategorySection>
-                    <LineSection key={i+1}></LineSection>
-                </>
+                <View key={i}>
+                    <CategorySection 
+                        menu={menu.category_name} 
+                        nav={() => navigation.navigate("Menu", {menu})
+                    }/>
+                    <LineSection/>
+                </View>
             );
         })
 
@@ -67,7 +68,7 @@ const Home = ({ navigation }) => {
     }
 
     return(
-        <SafeAreaView style={styles.constainer}>
+        <SafeAreaView style={styles.container}>
             {renderHeader()}
             {renderHomeImg()}
             {renderMenu()}
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         paddingHorizontal: 10
     },
-    constainer:{
+    container:{
         flex:1,
         backgroundColor: COLORS.black
     }

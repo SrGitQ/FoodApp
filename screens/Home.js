@@ -8,9 +8,12 @@ import {
     FlatList,
     View,
     Text,
+    ScrollView
 } from "react-native"
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
+import { CategorySection, LineSection } from "../components";
+import menu from "../components/src/menu-data"
 
 
 
@@ -47,10 +50,19 @@ const Home = ({ navigation }) => {
     }
 
     const renderMenu = () => {
-        return (
-            <FlatList style={styles.menuConainer}>
+        const categories = menu.map( (menu, i) =>{
+            return(
+                <>
+                    <CategorySection menu={menu.category_name} key={i} nav={()=>navigation.navigate("Menu")}></CategorySection>
+                    <LineSection key={i+1}></LineSection>
+                </>
+            );
+        })
 
-            </FlatList>
+        return (
+            <ScrollView style={styles.menuConainer}>
+                {categories}
+            </ScrollView>
         );
     }
 
@@ -66,6 +78,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     menuConainer:{
         backgroundColor:COLORS.white,
+        flex:1
     },
     renderHomeImg:{
         width:'100%',

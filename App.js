@@ -11,7 +11,7 @@ import { cartReducer } from './cartReducer'
 
 const Stack = createStackNavigator();
 
-const store = createStore(cartReducer, applyMiddleware)
+const store = createStore(cartReducer, applyMiddleware())
 
 const App = () => {
 

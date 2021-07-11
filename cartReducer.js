@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
-    current:"Hola carnal"
+    counter:{ amount: 0 }
 }
 
-const cartReducer = (state = INITIAL_STATE, action) => {
+export const cartReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case 'ADD_ITEM':
             const {

@@ -14,17 +14,17 @@ import {
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 import { ItemSection } from "../components";
 
+import { connect } from 'react-redux';
 
 
 
-const Cart = ({ navigation }) => {
-
+const Cart = (props) => {
     let back = "<"
 
     const renderHeader = () => {
         return (
             <View style={styles.headerContainer}>
-                <TouchableOpacity onPress={ () => navigation.goBack() } style={styles.backButton}>
+                <TouchableOpacity onPress={ () => props.navigation.goBack() } style={styles.backButton}>
                     <Text style={styles.backIcon}>{back}</Text>
                 </TouchableOpacity>
                 <Text style={styles.menuName}>Mi compra</Text>
@@ -35,7 +35,7 @@ const Cart = ({ navigation }) => {
     const renderItems = () => {
         return (
             <View style={styles.renderItemsContainer}>
-                <Text style={styles.itemsFormat}>1 items</Text>
+                <Text style={styles.itemsFormat}>{props.amount} items</Text>
                 <Text style={FONTS.largeTitle}>Mi orden</Text>
                 <ScrollView>
                     <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
@@ -154,4 +154,10 @@ const styles = StyleSheet.create({
 
 })
 
-export default Cart
+
+const mapStateToProps = (state, props) => {
+    return { amount: state.counter.amount }
+}
+
+
+export default connect(mapStateToProps)(Cart)

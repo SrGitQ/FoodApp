@@ -30,7 +30,7 @@ const ItemSection = (props) => {
         return (
             <View style={styles.sectionButton}>
         	    <TouchableOpacity
-					onPress={() => {props.nav()}}
+					onPress={ () => console.log("canasta") }
 					style={styles.openItemButton}
 				>
                     <Text style={styles.openItemButtonText}>Agregar</Text>

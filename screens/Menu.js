@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
-import { ItemSection } from '../components';
+import { ItemSection, CartExploit } from '../components';
 
 const Menu = ({route, navigation}) => {
     let {menu} = route.params
@@ -14,6 +14,9 @@ const Menu = ({route, navigation}) => {
                     <Text style={styles.backIcon}>{back}</Text>
                 </TouchableOpacity>
                 <Text style={styles.menuName}>{menu.category_name}</Text>
+                <View style={styles.buttonContainer}>
+                    <CartExploit nav={ () => navigation.navigate("Cart")}/>
+                </View>
             </View>
         );
     }
@@ -52,6 +55,15 @@ const Menu = ({route, navigation}) => {
 }
 
 const styles = StyleSheet.create({
+    buttonContainer:{
+        flex:1,
+        alignItems:'flex-end'
+
+    },
+    icon:{
+        width:30,
+        height:30
+    },
     menuConainer:{
         backgroundColor:COLORS.white,
         flex:1

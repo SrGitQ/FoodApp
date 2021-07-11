@@ -12,7 +12,7 @@ import {
 } from "react-native"
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
-import { CategorySection, LineSection } from "../components";
+import { CategorySection, LineSection, CartExploit } from "../components";
 import menu from "../components/src/menu-data"
 
 
@@ -31,9 +31,7 @@ const Home = ({ navigation }) => {
 
                 <Image source={images.logo} style={styles.logo}/>
 
-                <TouchableOpacity onPress={ () => navigation.navigate("Cart") }>
-                    <Image source={icons.cart} style={styles.icon}/>
-                </TouchableOpacity>
+                <CartExploit nav={ () => navigation.navigate("Cart") }/>
             </View>
         );
     }

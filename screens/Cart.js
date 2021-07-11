@@ -38,15 +38,8 @@ const Cart = (props) => {
                 <Text style={styles.itemsFormat}>{props.amount} items</Text>
                 <Text style={FONTS.largeTitle}>Mi orden</Text>
                 <ScrollView>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-
+                    <Text>{props.items.map( item => {return(item.id+" " +item.name)} )}</Text>
+                    {/**Here will be the items exploits */}
                 </ScrollView>
             </View>
         );
@@ -156,7 +149,10 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state, props) => {
-    return { amount: state.counter.amount }
+    return { 
+        amount: state.counter.amount,
+        items: state.items
+    }
 }
 
 

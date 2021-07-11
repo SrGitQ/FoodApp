@@ -2,6 +2,10 @@ import React from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addItem } from '../cartActions';
+
 
 const ItemSection = (props) => {
 
@@ -19,20 +23,25 @@ const ItemSection = (props) => {
 	const renderDescription = () => {
 		return (
         	<View style={styles.sectionDescription}>
-        	    <Text style={styles.itemTitle}>{props.name}</Text>
+        	    <Text style={styles.itemTitle}>{props.item.name}</Text>
         	    <Text style={styles.itemDescription}>Lorem ipsum dolor</Text>
-                <Text style={styles.itemPrice}>$ {props.price}</Text>
+                <Text style={styles.itemPrice}>$ {props.item.price}</Text>
         	</View>
 		);
 	}
-    
+    const item = {
+		id:props.item.id,
+		name:props.item.name,
+		cant:1
+	}
+
 	const renderButton = () => {
         return (
             <View style={styles.sectionButton}>
-        	    <TouchableOpacity
-					onPress={ () => console.log("canasta") }
+        	    <TouchableOpacity 
+					onPress={ () => props.addItem(item) }
 					style={styles.openItemButton}
-				>
+				>{/** TODO change taco */}
                     <Text style={styles.openItemButtonText}>Agregar</Text>
 				</TouchableOpacity>
         	</View>
@@ -110,4 +119,13 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ItemSection
+
+
+const mapDispatchToProps = dispatch => (
+	bindActionCreators({
+		addItem,
+	}, dispatch)
+);
+
+
+export default connect(null, mapDispatchToProps)(ItemSection)

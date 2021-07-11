@@ -1,20 +1,24 @@
 import { combineReducers } from "redux";
 
 const INITIAL_STATE = {
-    counter:{ amount: 0 }
+    counter:{ amount: 0 },
+    items:[]
 }
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case 'ADD_ITEM':
             const {
-                current
+                counter,
+                items
             } = state
             const addedItem = action.payload
+            
+            items.push(addedItem)
 
-            current.push(addedItem)
+            counter.amount++
 
-            const newState = { current }
+            const newState = { counter, items }
 
             return newState
 

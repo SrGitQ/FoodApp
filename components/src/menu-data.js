@@ -63,32 +63,32 @@ const tacos = {
     category_name: 'Tacos',
     items:[
         {
-            id:1,
+            id:12,
             name:'Pastor',
             price:18
         },
         {
-            id:1,
+            id:13,
             name:'Bistec',
             price:155
         },
         {
-            id:1,
+            id:14,
             name:'Costilla',
             price:162
         },
         {
-            id:1,
+            id:15,
             name:'Chuleta',
             price:108
         },
         {
-            id:1,
+            id:16,
             name:'Chorizo',
             price:89
         },
         {
-            id:1,
+            id:17,
             name:'Pollo',
             price:99
         }
@@ -99,22 +99,22 @@ const combinaciones = {
     category_name:"Combinaciones",
     items:[
         {
-            id:1,
+            id:18,
             name:"Bistec con tocino",
             price:152
         },
         {
-            id:2,
+            id:19,
             name:"Bistec con chorizo",
             price:145
         },
         {
-            id:3,
+            id:20,
             name:"Bistec Encebollado",
             price:152
         },
         {
-            id:4,
+            id:21,
             name:"Bistec y chile poblano",
             price:144
         }
@@ -125,27 +125,27 @@ const alambres = {
     category_name:"Alambres",
     items:[
         {
-            id:1,
+            id:22,
             name:"Alambre de bistec",
             price:176
         },
         {
-            id:2,
+            id:23,
             name:"Alambre de pollo",
             price:164
         },
         {
-            id:3,
+            id:24,
             name:"Alambre de chuleta",
             price:164
         },
         {
-            id:4,
+            id:25,
             name:"Alambre de pastor",
             price:164
         },
         {
-            id:5,
+            id:26,
             name:"Alambre con queso",
             price:193
         }
@@ -156,27 +156,27 @@ const quesos = {
     category_name:"Quesos",
     items:[
         {
-            id:1,
+            id:27,
             name:"Queso fundido",
             price:109
         },
         {
-            id:2,
+            id:28,
             name:"Queso con chorizo",
             price:109
         },
         {
-            id:3,
+            id:29,
             name:"Queso con chile poblano",
             price:109
         },
         {
-            id:4,
+            id:30,
             name:"Quesadilla",
             price:82
         },
         {
-            id:5,
+            id:31,
             name:"Chicharron de queso",
             price:94
         }
@@ -187,32 +187,32 @@ const volcanes = {
     category_name:"Volcanes",
     items:[
         {
-            id:1,
+            id:32,
             name:"Volcan con queso",
             price:90
         },
         {
-            id:2,
+            id:33,
             name:"Volcan con pastor",
             price:99
         },
         {
-            id:3,
+            id:34,
             name:"Volcan con bistec",
             price:109
         },
         {
-            id:4,
+            id:35,
             name:"Volcan con poblano",
             price:79
         },
         {
-            id:5,
+            id:36,
             name:"Cebollitas",
             price:79
         },
         {
-            id:6,
+            id:37,
             name:"Frijodes charros",
             price:60
         }

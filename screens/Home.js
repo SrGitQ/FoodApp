@@ -13,7 +13,7 @@ import {
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 import { CategorySection, LineSection, CartExploit } from "../components";
-import menu from "../components/src/menu-data"
+import {menu} from "../components/src/menu-data"
 
 
 

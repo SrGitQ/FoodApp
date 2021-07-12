@@ -32,7 +32,7 @@ const Menu = ({route, navigation}) => {
 
     const items = menu.items.map( (item, i) => {
         return(
-            <ItemSection name={item.name} price={item.price} key={i} ></ItemSection>
+            <ItemSection item = {item} key={i} ></ItemSection>
         );
     })
 

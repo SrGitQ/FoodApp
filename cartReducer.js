@@ -14,7 +14,12 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
             } = state
             const addedItem = action.payload
             
-            items.push(addedItem)
+            if(items.some( (item) => item.id === addedItem.id)){
+                items[i].cant++
+            } else{
+                items.push(addedItem)
+            }
+
 
             counter.amount++
 

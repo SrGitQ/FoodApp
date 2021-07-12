@@ -32,7 +32,8 @@ const ItemSection = (props) => {
     const item = {
 		id:props.item.id,
 		name:props.item.name,
-		cant:1
+		price:props.item.price,
+		cant:1,
 	}
 
 	const renderButton = () => {

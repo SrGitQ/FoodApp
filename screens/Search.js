@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import {
     SafeAreaView,
@@ -14,11 +14,20 @@ import {
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 import { ItemSection } from "../components";
+import { generalMenu } from "../components/src/menu-data";
 
 
 
 
 const Search = ({ navigation }) => {
+    const [search, setSearch] = useState("Hola")
+
+    const getCoincidence = (seacrh) => {
+        const cons = []
+        generalMenu.map( item => {
+        })
+    }
+
 
     let back = "<"
 
@@ -37,18 +46,15 @@ const Search = ({ navigation }) => {
         return (
             <View style={styles.renderItemsContainer}>
                 <View>
-                    <TextInput></TextInput>
+                    <TextInput 
+                        style={styles.searchBox}
+                        onSubmitEditing={()=>console.log("HOLA SEARCH")}
+                    />
                 </View>
                 <ScrollView>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-                    <ItemSection name={"item.name"} price={"item.price"}></ItemSection>
-
+                    <Text>
+                        {search}
+                    </Text>
                 </ScrollView>
             </View>
         );
@@ -63,6 +69,10 @@ const Search = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    searchBox:{
+        backgroundColor:'gainsboro',
+        color:COLORS.darkgray
+    },
     itemsFormat:{
         color:'gray',
         fontSize:17,
@@ -70,7 +80,8 @@ const styles = StyleSheet.create({
     },
     renderItemsContainer:{
         backgroundColor:COLORS.lightGray,
-        flex:1
+        flex:1,
+        paddingHorizontal:7
     },
     menuName:{
         color:COLORS.white,

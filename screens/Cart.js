@@ -8,13 +8,16 @@ import {
     FlatList,
     View,
     Text,
-    ScrollView
+    ScrollView,
+    Button
 } from "react-native"
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
 import { ItemSection } from "../components";
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { delItem } from '../cartActions';
 
 
 
@@ -33,16 +36,35 @@ const Cart = (props) => {
     }
 
     const renderItems = () => {
+        const items = (
+            props.items.map( (item,i) => {
+                return(
+                    <View key={i}>
+                        <Text>
+                            {item.cant+"x " +item.name}
+                        </Text>
+                        <Button onPress={()=>props.delItem(item)} title={"hola"}></Button>
+                    </View>
+                )
+            })
+        )
         return (
             <View style={styles.renderItemsContainer}>
                 <Text style={styles.itemsFormat}>{props.amount} items</Text>
                 <Text style={FONTS.largeTitle}>Mi orden</Text>
                 <ScrollView>
-                    <Text>{props.items.map( item => {return(item.id+" " +item.name)} )}</Text>
+                    {items}
                     {/**Here will be the items exploits */}
                 </ScrollView>
             </View>
         );
+    }
+    const getPrice = () => {
+        let price = 0
+        props.items.map( (item) => {
+            price = price + (item.price * item.cant) 
+        })
+        return price
     }
 
     const renderInformation = () => {
@@ -55,12 +77,12 @@ const Cart = (props) => {
                 </View>
                 <View style={styles.priceContainer}>
                     <Text style={FONTS.h2}>TOTAL</Text>
-                    <Text style={FONTS.h1}>$ 404.08</Text>
+                    <Text style={FONTS.h1}>$ {getPrice()}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={()=>console.log("Hola")}
+                        onPress={()=>console.log("hola")}
                     >
                         <Text style={[FONTS.h1, {color:COLORS.white, fontWeight:'bold'}]}>PEDIR</Text>
                     </TouchableOpacity>
@@ -112,7 +134,8 @@ const styles = StyleSheet.create({
     },
     renderItemsContainer:{
         backgroundColor:COLORS.lightGray,
-        flex:0.7
+        flex:0.7,
+        paddingHorizontal:5
     },
     menuName:{
         color:COLORS.white,
@@ -155,5 +178,11 @@ const mapStateToProps = (state, props) => {
     }
 }
 
+const mapDispatchToProps = dispatch => (
+	bindActionCreators({
+		delItem,
+	}, dispatch)
+);
 
-export default connect(mapStateToProps)(Cart)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

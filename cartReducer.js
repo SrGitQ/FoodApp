@@ -59,7 +59,12 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     
             var newState = { counter, items }
 
-            return newState            
+            return newState  
+        case 'RESET_CART':
+            return newState = {
+                    counter:{ amount: 0 },
+                    items:[]
+                }
         default:
             return state
     }

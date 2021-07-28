@@ -9,7 +9,8 @@ import {
     View,
     Text,
     ScrollView,
-    Button
+    Button,
+    Linking
 } from "react-native"
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
@@ -17,7 +18,98 @@ import { ItemSection } from "../components";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { delItem } from '../cartActions';
+import { delItem, addItem, resetCart } from '../cartActions';
+
+
+
+const CartItemRender = (props) => {
+
+    const item = {
+		id:props.item.id,
+		name:props.item.name,
+		price:props.item.price,
+		cant:1,
+	}
+	const renderImage = () => {
+		return (
+        	<View style={styles.sectionImage}>
+        	    <View style={styles.backgroundImg}>
+					<Image source = {images.taco} style={styles.imageRender}/>
+				</View>
+        	</View>
+		);
+	}
+
+	const renderDescription = () => {
+		return (
+        	<View style={styles.sectionDescription}>
+                {renderImage()}
+        	    <Text style={styles.itemTitle}>{props.item.name}</Text>
+                <Text style={styles.itemPrice}>1x${props.item.price}</Text>
+        	</View>
+		);
+	}
+    const renderButtons = () => {
+        return (
+            <View
+                style={{
+                    flexDirection:'row'
+                }}
+            >
+                <TouchableOpacity
+                    style={{
+                        backgroundColor:'white',
+                        borderBottomLeftRadius:100,
+                        borderTopLeftRadius:100,
+                        height:30,
+                        width:30,
+                        justifyContent:'center',
+                        alignItems:'center'
+                    }}
+                    onPress={ () => props.remove() }
+                >
+                    <Text>-</Text>
+                </TouchableOpacity>
+                <View
+                    style={{
+                        backgroundColor:'white',
+                        height:30,
+                        width:30,
+                        justifyContent:'center',
+                        alignItems:'center'
+                    }}
+                >
+                    <Text>{props.item.cant}</Text>
+                </View>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor:'white',
+                        borderBottomRightRadius:100,
+                        borderTopRightRadius:100,
+                        height:30,
+                        width:30,
+                        justifyContent:'center',
+                        alignItems:'center'
+                    }}
+                    onPress={ () => props.add() }
+                >
+                    <Text>+</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    return(
+    	<View style={styles.itemContainer}>
+            {renderDescription()}
+            {renderButtons()}
+        </View>
+    )
+}
+
+
+
+
+
 
 
 
@@ -40,17 +132,20 @@ const Cart = (props) => {
             props.items.map( (item,i) => {
                 return(
                     <View key={i}>
-                        <Text>
-                            {item.cant+"x " +item.name}
-                        </Text>
-                        <Button onPress={()=>props.delItem(item)} title={"hola"}></Button>
+                        <CartItemRender 
+                            item = {item} 
+                            add={() => props.addItem(item)}
+                            remove={() => props.delItem(item)}
+                        />
+                        <View style={{height:10}}></View>
+                        
                     </View>
                 )
             })
         )
         return (
             <View style={styles.renderItemsContainer}>
-                <Text style={styles.itemsFormat}>{props.amount} items</Text>
+                <Text style={styles.itemsFormat}>{props.amount} productos</Text>
                 <Text style={FONTS.largeTitle}>Mi orden</Text>
                 <ScrollView>
                     {items}
@@ -72,8 +167,8 @@ const Cart = (props) => {
             <View style={styles.renderInformationContainer}>
                 <View>
                     <Text>Cliente</Text>
-                    <Text style={FONTS.h2}>JUAN MANUEL</Text>
-                    <Text style={styles.address}>cd Caucel</Text>
+                    <Text style={FONTS.h2}>FEDERICO</Text>
+                    <Text style={styles.address}>La costa</Text>
                 </View>
                 <View style={styles.priceContainer}>
                     <Text style={FONTS.h2}>TOTAL</Text>
@@ -82,7 +177,19 @@ const Cart = (props) => {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={()=>console.log("hola")}
+                        onPress={()=>{
+                            if (props.items.length > 0){
+                                let itemsList = props.items.map( (item =>`    ${item.cant}x${item.name}\n`))
+                                let message = `Hola Run Run, Soy Federico, quiero ordenar Tacos'Tumbras.\nEste es mi numero: .\nMi dirección es: .\nQuisiera ordenar:\n${itemsList}mi total es: $${getPrice()}.00`
+                                console.log(message)
+    
+                                Linking.openURL('whatsapp://send?text='+ message +'&phone=+52 1 999 140 5395')
+                                props.resetCart()
+                                props.navigation.goBack()
+                            }else{
+                                props.navigation.navigate('Home')
+                            }
+                        }}
                     >
                         <Text style={[FONTS.h1, {color:COLORS.white, fontWeight:'bold'}]}>PEDIR</Text>
                     </TouchableOpacity>
@@ -101,6 +208,45 @@ const Cart = (props) => {
 }
 
 const styles = StyleSheet.create({
+    itemPrice:{
+        color: '#ffc108',
+        fontWeight:'bold',
+        fontSize:17
+    },
+    itemTitle:{
+        fontWeight:'bold',
+        fontSize:20,
+        paddingHorizontal:10
+    },
+    imageRender:{
+        width:'90%',
+        height:'90%',
+        justifyContent:'center',
+        borderRadius:100
+    },
+    backgroundImg:{
+        height:50,
+        width:50,
+        backgroundColor: COLORS.redblack,
+        borderRadius:100,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    itemContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingHorizontal:20,
+        alignItems:'center'
+    },
+    sectionImage:{
+        justifyContent:'center',
+    },
+    sectionDescription:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:'30%',
+        alignItems:'center'
+    },
     button:{
         backgroundColor:COLORS.black,
         width:'90%',
@@ -181,6 +327,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => (
 	bindActionCreators({
 		delItem,
+        addItem,
+        resetCart
 	}, dispatch)
 );
 

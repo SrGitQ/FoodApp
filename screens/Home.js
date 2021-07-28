@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
             return(
                 <View key={i}>
                     <CategorySection 
-                        menu={menu.category_name} 
+                        menu={menu.category_name}
                         nav={() => navigation.navigate("Menu", {menu})
                     }/>
                     <LineSection/>
